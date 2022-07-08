@@ -14,14 +14,14 @@ class Pages extends CI_Controller {
 	public function index()
 	{	
 		// $data['vehicles'] = $this->model_vehicle->getAll();
-		$data['vehicles'] = $this->model_vehicle->getLatest();
-		$data['featured'] = $this->model_vehicle->getFeatured();
-		$data['manufacturers'] = $this->model_manufacturer->getAllManufacturers();
-		$data['models'] = $this->model_car_model->getAllModels();
+		// $data['vehicles'] = $this->model_vehicle->getLatest();
+		// $data['featured'] = $this->model_vehicle->getFeatured();
+		// $data['manufacturers'] = $this->model_manufacturer->getAllManufacturers();
+		// $data['models'] = $this->model_car_model->getAllModels();
 		
-		$this->parser->parse('public/view_index', $data);   
+		// $this->parser->parse('public/view_index', $data);   
 
-        // $this->load->view('public/view_index');
+         $this->load->view('view_login');
 	}
 
 	public function show($vehicle_id)

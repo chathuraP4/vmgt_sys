@@ -56,7 +56,7 @@
 		<div class="container">
 			<div class="head-top">
 				<div class="logo">
-					<h1><a href="<?= base_url(); ?>">VSMS</a></h1>
+					<h1><a href="<?= base_url(); ?>">BROOOOM.LK</a></h1>
 				</div>
 		  <div class=" h_menu4">
 				<ul class="memenu skyblue">
