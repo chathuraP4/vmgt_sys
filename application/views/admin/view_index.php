@@ -101,6 +101,7 @@
 			                    </div>
 			                    <div class="w_right w_20">
 			                      	<span><?= $manufacturer['total']; ?></span>
+									<p>paragraph</p>
 			                    </div>
 			                    <div class="clearfix"></div>
 		                  	</div>
