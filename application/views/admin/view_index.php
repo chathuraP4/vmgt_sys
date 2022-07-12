@@ -128,6 +128,7 @@
 							</ul>
 						</li>
 						<li><a class="close-link"><i class="fa fa-close"></i></a></li>
+						<li>vehicle</li>
         	      	</ul>
         	      	<div class="clearfix"></div>
         	    </div>
