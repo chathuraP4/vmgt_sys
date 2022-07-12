@@ -9,7 +9,7 @@
 <body>
     <div class="loginPage">    
         <header>
-            <h2>VSMS Login</h2>
+            <h2>BROOOOM.LK Login</h2>
         </header>
         <?php echo validation_errors(); ?>
         

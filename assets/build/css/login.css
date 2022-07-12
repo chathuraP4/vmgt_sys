@@ -1,8 +1,8 @@
 @charset "UTF-8";
 body {
-  background: #C3E6F3 no-repeat center center fixed;
+  background: #88acfa no-repeat center center fixed;
   /* IE Fallback */
-  background: #c3e6f4;
+  background: #c2b6f7;
   width: 100%;
   height: 100%;
 }
@@ -22,7 +22,7 @@ body {
 .loginPage h2 {
   margin: 0 0 20px;
   line-height: 1;
-  color: #0088BA;
+  color: #000cba;
   font-size: 18px;
   font-weight: 400;
   text-align: center;
@@ -61,7 +61,7 @@ body {
 
 .loginPage button {
   cursor: pointer;
-  background: #0088BA;
+  background: #0b0281;
   width: 100%;
   padding: 10px 15px;
   border: 0;
@@ -72,7 +72,7 @@ body {
 }
 
 .loginPage button:hover {
-  background: #369cb8;
+  background: #2777ee;
 }
 
 .button {
