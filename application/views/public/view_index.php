@@ -18,7 +18,7 @@
 				<li>
 					
 					<div class="banner-text">
-						<h3>Lorem Ipsum is   </h3>
+						<h3>Lorem Ipsum is test   1</h3>
 						<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.</p>
 						
 					</div>
