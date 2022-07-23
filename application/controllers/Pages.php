@@ -8,7 +8,7 @@ class Pages extends CI_Controller {
 		
 		$this->load->model('model_vehicle');
         $this->load->model('model_manufacturer');
-        $this->load->model('model_car_model');
+        // $this->load->model('model_car_model');
 	}
 
 	public function index()
