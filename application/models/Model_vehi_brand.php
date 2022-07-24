@@ -20,7 +20,13 @@ class Model_vehi_brand extends CI_Model
     public function load_vehi_brands()
     {
 
-        $sql = "SELECT `id`,`brand`,`type`FROM `vehicle_brand`";
+        $sql = "SELECT
+        b.`id`,
+        b.`brand`,
+        t.`type`
+        FROM `vehicle_brand` b
+        JOIN `vehicle_type` t ON t.`id`=b.`type`
+        ";
         $query = $this->db->query($sql)->result();
 
         return $query;
