@@ -92,7 +92,7 @@ class Model_vehi_brand extends CI_Model
 
     public function max_no()
     {
-        $sql = "SELECT MAX(id)+1 AS  max_no FROM `vehicle_brand`";
+        $sql = "SELECT ifnull(MAX(id),0)+1 AS  max_no FROM `vehicle_brand`";
         $query = $this->db->query($sql)->first_row()->max_no;
 
         return $query;

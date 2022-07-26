@@ -20,6 +20,10 @@ class Vehicles extends CI_Controller {
         $data['vehicles'] = $this->model_vehicle->getAll();
         $data['manufacturers'] = $this->model_manufacturer->getAllManufacturers();
         $data['models'] = $this->model_car_model->getAllModels();
+
+        $data['vtypes'] = $this->model_vehicle->getvtypes();
+
+
         
         //$this->load->view('view_vehicle', $data); 
         $this->parser->parse('admin/view_vehicle', $data);   
@@ -72,77 +76,6 @@ class Vehicles extends CI_Controller {
         }
 	}
 
-	public function add()
-	{	
-		if($this->input->post('buttonSubmit')) {
-			$data['message'] = '';
-		
-				$this->form_validation->set_rules('manufacturer_id', 'Manufacturer', 'required');
-				$this->form_validation->set_rules('model_id', 'Model', 'required');
-				$this->form_validation->set_rules('category', 'Category ', 'required');
-				$this->form_validation->set_rules('b_price', 'Buying Price ', 'required');
-				$this->form_validation->set_rules('mileage', 'Mileage', 'required');
-				$this->form_validation->set_rules('add_date', 'Adding Date', 'required');
-				$this->form_validation->set_rules('registration_year', 'Registration Year Date', 'required');
-				$this->form_validation->set_rules('insurance_id', 'Insurance ID', 'required');
-				$this->form_validation->set_rules('gear', 'Gear', 'required');
-				$this->form_validation->set_rules('doors', 'Number of Doors', 'required');
-				$this->form_validation->set_rules('seats', 'Number of Seats', 'required');
-				$this->form_validation->set_rules('tank', 'Tank capacity', 'required');
-				$this->form_validation->set_rules('e_no', 'Engine No', 'required');
-				$this->form_validation->set_rules('c_no', 'Chasis No', 'required');
-				$this->form_validation->set_rules('v_color', 'Color', 'required');		
-				
-				if($this->form_validation->run() == FALSE)
-				{
-					//$data['vRow'] = $this->model_vehicle->get($cid);
-                    $this->load->view('admin/view_vehicle');
-				}
-				else{
-					
-		
-            $config['upload_path']          = './uploads/';
-            $config['allowed_types']        = 'gif|jpg|png';
-            $config['max_width']    = '2048';
-            $config['max_height']   = '2048';
-            $this->load->library('upload', $config);
-            
-            
-            $manufacturer_name = $this->input->post('manufacturer_id');
-		    $model_name = $this->input->post('model_id');
-            $category = $this->input->post('category');
-            $b_price = $this->input->post('b_price');
-        
-            $mileage = $this->input->post('mileage');
-            $add_date = $this->input->post('add_date');
-            $status = "available";
-            $registration_year = $this->input->post('registration_year');
-            $insurance_id = $this->input->post('insurance_id');
-            $gear = $this->input->post('gear');
-            $doors = $this->input->post('doors');
-            $seats = $this->input->post('seats');
-            $tank = $this->input->post('tank');
-            $e_no = $this->input->post('e_no');
-            $c_no = $this->input->post('c_no');
-            $u_id = $this->session->userdata('id');
-            $v_color = $this->input->post('v_color');
-            $featured = $this->input->post('featured');
-            
-            $this->upload->do_upload('image');
-            $data = $this->upload->data('image');
-            $image= $data['file_name']; 
-			
-            $this->model_vehicle->insert($featured,$image,$manufacturer_name,$model_name,$category,$b_price,$mileage,$add_date,$status,$registration_year,$insurance_id,$gear,$doors,$seats,$tank,$e_no,$c_no,$u_id,$v_color);
-			$this->session->set_flashdata('message','Vehicle Successfully Created.');
-			redirect(base_url('admin/vehicles'));
-		
-			}
-		}
-		else{
-		redirect(base_url('admin/vehicles'));
-		}
-	}
-
 
 
 	public function DeleteVehicle()
@@ -151,7 +84,7 @@ class Vehicles extends CI_Controller {
              
             $id = $this->input->post('vehicle_id');
             $this->model_vehicle->delete($id);
-			$this->session->set_flashdata('message','Vehicle Successfully Deleted.');
+			//$this->session->set_flashdata('message','Vehicle Successfully Deleted.');
             redirect(base_url('admin/vehicles'));
         }
         else {
@@ -166,8 +99,9 @@ class Vehicles extends CI_Controller {
             $c_id= $this->input->post('c_id');
                
             $this->model_vehicle->deletecustomer($c_id,$v_id);
-			$this->session->set_flashdata('message','Customer Successfully Created.');
-            redirect(base_url('admin/vehicles/soldlist'));
+			//$this->session->set_flashdata('message','Customer Successfully Created.');
+           // $url=(base_url('admin/vehicles/soldlist'));
+           redirect(base_url('admin/vehicles/soldlist'));
         }
         else{
             redirect(base_url('admin/vehicles/soldlist'));
@@ -179,5 +113,65 @@ class Vehicles extends CI_Controller {
         $data['cus'] = $this->model_vehicle->customerList();
         $this->load->view('admin/view_sold', $data);     
     }
+
+// ------------------------------------------------------
+
+
+public function load_brands(){
+    $res['data']=$this->model_vehicle->load_brands();
+    echo json_encode($res);
+}
+
+
+public function load_models(){
+    $res['data']=$this->model_vehicle->load_models();
+    echo json_encode($res);
+}
+
+
+public function create()
+	{   
+
+		if($this->input->post('submit')!==null){
+		$vl=$this->model_vehicle->create();
+		
+		if($vl=='ok'){
+			$data = array('success' => true, 'msg'=> '<script>swal({
+				title: "Success! ",
+				text: "Your work has been saved!",
+				icon: "success",
+			   
+				dangerMode: false,
+			  }).then((willDelete) => {
+				if (willDelete) {
+				  window.location = "'.base_url().'admin/vehicles";
+				} 
+			  }); </script>');
+		}else if($vl=='img_insert_fail'){
+			$data = array('success' => false, 'typ'=>true, 'msg'=> "<script>swal({
+				title: 'Oops! Image Insert Fail',
+				
+				icon: 'error',
+				
+				dangerMode: true,
+			});</script>");
+		}else{
+			$data = array('success' => false, 'typ'=>true, 'msg'=> "<script>swal({
+				title: 'Oops! Vehicle Not Created',
+				
+				icon: 'error',
+				
+				dangerMode: true,
+			});</script>");
+		}
+
+		echo json_encode($data);
+		
+		}else{
+			redirect(base_url().'admin/vehicles');
+		}
+	}
+
+
 }
 
