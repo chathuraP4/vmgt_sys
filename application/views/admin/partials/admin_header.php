@@ -58,22 +58,14 @@
                 <li><a href="<?= base_url('admin/dashboard'); ?>"><i class="fa fa-home"></i> Dashboard </a></li>
                 <?php if ($this->session->userdata('type') == "admin") : ?>
                   <li><a><i class="fa fa-table"></i> Vehicles Setup <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="<?= base_url('admin/vehi_type'); ?>">Type</a></li>
-                    <li><a href="<?= base_url('admin/vehi_brand'); ?>">Brand</a></li>
-                    <li><a href="<?= base_url('admin/vehi_model'); ?>">Model</a></li>
-                  </ul>
-                </li>
-                  <li><a><i class="fa fa-edit"></i> Manage Employee <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?= base_url('admin/employee/add'); ?>">Add new</a></li>
-                      <li><a href="<?= base_url('admin/employee'); ?>">All Employees</a></li>
+                      <li><a href="<?= base_url('admin/vehi_type'); ?>">Type</a></li>
+                      <li><a href="<?= base_url('admin/vehi_brand'); ?>">Brand</a></li>
+                      <li><a href="<?= base_url('admin/vehi_model'); ?>">Model</a></li>
                     </ul>
                   </li>
-
                   <li>
                     <a><i class="fa fa-desktop"></i>Manufacturers<span class="fa fa-chevron-down"></span></a>
-
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url() . 'admin/manufacturers'; ?>">Add Manufacturer</a></li>
                     </ul>
@@ -85,6 +77,18 @@
                     <li><a href="<?= base_url('admin/vehicles/soldlist'); ?>">Sold Vehicles</a></li>
                   </ul>
                 </li>
+                <li><a><i class="fa fa-table"></i> Vehicle Lease <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="<?= base_url('admin/vehi_lease'); ?>">Lease Rate</a></li>
+                  </ul>
+                </li>
+                <li><a><i class="fa fa-edit"></i> Manage Employee <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="<?= base_url('admin/employee/add'); ?>">Add new</a></li>
+                    <li><a href="<?= base_url('admin/employee'); ?>">All Employees</a></li>
+                  </ul>
+                </li>
+
               </ul>
             </div>
           </div>
