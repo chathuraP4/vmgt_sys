@@ -37,7 +37,7 @@
         	<div class="col-md-6 col-xs-12">
               	<div class="x_panel tile fixed_height_320">
                 	<div class="x_title">
-                  		<h2>Vehicle Count in Manufacturers</h2>
+                  		<h2>Vehicle Count in Brand</h2>
 	                  		<ul class="nav navbar-right panel_toolbox">
 	                    	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
 	                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
@@ -75,7 +75,7 @@
             <div class="col-md-6 col-xs-12">
               	<div class="x_panel tile fixed_height_320">
                 	<div class="x_title">
-                  		<h2>Sold Vehicle Count in Manufacturers</h2>
+                  		<h2>Sold Vehicle Count in Brand</h2>
 	                  		<ul class="nav navbar-right panel_toolbox">
 	                    	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
 	                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
@@ -101,6 +101,7 @@
 			                    </div>
 			                    <div class="w_right w_20">
 			                      	<span><?= $manufacturer['total']; ?></span>
+									<p></p>
 			                    </div>
 			                    <div class="clearfix"></div>
 		                  	</div>
