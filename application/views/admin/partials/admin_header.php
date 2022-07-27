@@ -76,7 +76,6 @@
 
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url() . 'admin/manufacturers'; ?>">Add Manufacturer</a></li>
-                      <li><a href="<?php echo base_url() . 'admin/car_model'; ?>">Add Model</a></li>
                     </ul>
                   </li>
                 <?php endif; ?>

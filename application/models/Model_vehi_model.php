@@ -45,7 +45,7 @@ class Model_vehi_model extends CI_Model
     {
         $data = array(
             // 'type' => $this->input->post('type_id'),
-             'brand' => $this->input->post('brand_id'),
+            'brand' => $this->input->post('brand_id'),
             'id' => $this->input->post('model_id'),
             'model' => $this->input->post('model_name'),
         );

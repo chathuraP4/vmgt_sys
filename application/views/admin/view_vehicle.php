@@ -10,7 +10,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Manufacturers</h3>
+                <h3>ALL VEHICALS</h3>
             </div>
         </div>
         <div class="clearfix"></div>
