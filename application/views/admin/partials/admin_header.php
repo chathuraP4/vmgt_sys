@@ -31,7 +31,7 @@
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="<?= base_url('admin/dashboard'); ?>" class="site_title"><i class="fa fa-paw"></i> <span>ATP-III VSMS</span></a>
+            <a href="<?= base_url('admin/dashboard'); ?>" class="site_title"><i class="fa fa-car"></i> <span>BROOOOM.LK SYS</span></a>
           </div>
 
           <div class="clearfix"></div>
@@ -57,6 +57,13 @@
               <ul class="nav side-menu">
                 <li><a href="<?= base_url('admin/dashboard'); ?>"><i class="fa fa-home"></i> Dashboard </a></li>
                 <?php if ($this->session->userdata('type') == "admin") : ?>
+                  <li><a><i class="fa fa-table"></i> Vehicles Setup <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="<?= base_url('admin/vehi_type'); ?>">Type</a></li>
+                    <li><a href="<?= base_url('admin/vehi_brand'); ?>">Brand</a></li>
+                    <li><a href="<?= base_url('admin/vehi_model'); ?>">Model</a></li>
+                  </ul>
+                </li>
                   <li><a><i class="fa fa-edit"></i> Manage Employee <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?= base_url('admin/employee/add'); ?>">Add new</a></li>
@@ -65,7 +72,7 @@
                   </li>
 
                   <li>
-                    <a><i class="fa fa-desktop"></i>Manufacturers &amp; Model <span class="fa fa-chevron-down"></span></a>
+                    <a><i class="fa fa-desktop"></i>Manufacturers<span class="fa fa-chevron-down"></span></a>
 
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url() . 'admin/manufacturers'; ?>">Add Manufacturer</a></li>
