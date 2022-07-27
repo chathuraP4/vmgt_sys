@@ -174,7 +174,7 @@
                                     <label for="gear">Status</label>
                                     <select name="status" id="status" class="form-control">
                                         <option value="available">Available</option>
-                                        <option value="not available">Not Available</option>
+                                        <option value="not available">For Auction</option>
 
                                     </select>
                                 </div>
