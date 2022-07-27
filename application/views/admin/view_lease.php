@@ -43,8 +43,8 @@
                                     echo "<td>$t->type</td>";
                                     echo "<td>$t->brand</td>";
                                     echo "<td>$t->model</td>";
-                                    echo "<td>$t->condition</td>";
-                                    echo "<td>$t->register</td>";
+                                    echo "<td>$t->conditions</td>";
+                                    echo "<td>$t->reg_status</td>";
                                     echo "<td>$t->rate</td>";
                                     echo "<th>";
                                     echo "<button class='btn btn-warning btn-xs'  onclick='editrate(" . $t->id . ")' >Edit</button>";
@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="brand_id">Brand:</label>
-                                    <select id="brand_id" name='brand_id' class="form-control">
+                                    <select id="brand_id" name='brand_id' class="form-control" required>
                                         <option value="0">SELECT BRAND </option>
                                     </select>
                                 </div>
@@ -88,17 +88,16 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <div class="dropdown-center d-grid">
-                                        <label>Condition</label>
-                                        <select class="form-select form-select-lg mb-3 rate_cal" style="font-size: 15px;" id="condition">
-                                            <option class="dropdown-item option1" value="5">Please Select</option>
-                                            <option class="dropdown-item option1" value="1">Brand New</option>
-                                            <option class="dropdown-item option1" value="0">Recondition</option>
-                                        </select>
-                                    </div>
+                                    <label for="Condition">Condition:</label>
+                                    <select id="Condition"name='Condition' class="form-control">
+                                    <option  value="5">Please Select</option>
+                                            <option  value="1">Brand New</option>
+                                            <option  value="0">Recondition</option>
+                                    </select>
+                                </div>
                                     <div class="form-group">
                                         <label>Register Status</label>
-                                        <select class="form-select form-select-lg mb-3 rate_cal" style="font-size: 15px;" id="regstatus">
+                                        <select class="form-control" id="regstatus">
                                             <option class="dropdown-item option1" value="5">Please Select</option>
                                             <option class="dropdown-item option1" value="1">Register</option>
                                             <option class="dropdown-item option1" value="0">Unregister</option>
@@ -107,7 +106,8 @@
                                     </div>
                                     <div>
                                         <label for="exampleFormControlInput1" class="form-label">Rate</label>
-                                        <input type="text" id="rate" name="rate" class="form-control" value="">
+                                        <input type="text" id="rate" name="lease_rate" class="form-control" value="">
+                                        <input class="form-control" name="hid" id="hid" type="hidden" value="0">
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" name="submit" class="btn btn-primary" id="send_form">Add Rate</button>
@@ -174,7 +174,7 @@
             },
             submitHandler: function(form) {
                 $.ajax({
-                    url: "<?php echo base_url('admin/Vehi_Lease/create') ?>",
+                    url: "<?php echo base_url('admin/Vehi_lease/create') ?>",
                     type: "POST",
                     data: $('#ajax_form').serialize(),
                     dataType: "json",
@@ -201,7 +201,7 @@
         });
     }
 
-    function editlease(id) {
+    function editrate(id) {
         $.ajax({
             url: "<?php echo base_url('admin/Vehi_lease/edit_lease') ?>",
             type: "POST",
@@ -225,10 +225,10 @@
         });
     }
 
-    function deletemodel(id) {
+    function deleterate(id) {
         if (confirm('Are you Sure ?')) {
             $.ajax({
-                url: "<?php echo base_url('admin/Vehi_model/delete_model') ?>",
+                url: "<?php echo base_url('admin/Vehi_lease/delete_lease') ?>",
                 type: "POST",
                 data: {
                     id: id

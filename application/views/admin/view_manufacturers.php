@@ -32,6 +32,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                
                                 {manufacturers}
                                     <tr>
                                         <td>{id}</td>

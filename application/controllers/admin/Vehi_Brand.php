@@ -75,6 +75,14 @@ class Vehi_Brand extends CI_Controller
 		echo json_encode($data);
 				
 	}
+	public function select_type()
+	{   
+		$vl=$this->Model_vehi_brand->select_type();
+        $data['success']= $vl;
+        
+		echo json_encode($data);
+				
+	}
 
     public function delete_brand()
 	{   

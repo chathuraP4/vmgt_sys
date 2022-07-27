@@ -68,7 +68,7 @@ class Vehi_Lease extends CI_Controller
 	}
 
 
-    public function edit_model()
+    public function edit_lease()
 	{   
 		$vl=$this->Model_vehi_lease->edit();
         $data['success']= $vl;
@@ -94,7 +94,7 @@ class Vehi_Lease extends CI_Controller
 		echo json_encode($data);
 				
 	}
-    public function delete_model()
+    public function delete_lease()
 	{   
 		$vl=$this->Model_vehi_lease->delete();
 		

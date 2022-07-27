@@ -3,6 +3,9 @@
 class Model_vehi_model extends CI_Model
 {
 
+
+
+
     public function select_type()
     {
 
