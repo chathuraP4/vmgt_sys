@@ -72,7 +72,7 @@
                         <div class="x_content">
                             <fieldset>
                                 <div class="form-group">
-                                    <label for="type_id"> Type:</label>
+                                    <label for="type_id" name="type"> Type:</label>
                                     <?= $types ?>
                                 </div>
                                 <div class="form-group">
@@ -89,29 +89,30 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="Condition">Condition:</label>
-                                    <select id="Condition"name='Condition' class="form-control">
-                                    <option  value="5">Please Select</option>
-                                            <option  value="1">Brand New</option>
-                                            <option  value="0">Recondition</option>
+                                    <select id="Condition" name='Condition' class="form-control">
+                                        <option value="5">Please Select</option>
+                                        <option value="1">Brand New</option>
+                                        <option value="0">Recondition</option>
                                     </select>
                                 </div>
-                                    <div class="form-group">
-                                        <label>Register Status</label>
-                                        <select class="form-control" id="regstatus">
-                                            <option class="dropdown-item option1" value="5">Please Select</option>
-                                            <option class="dropdown-item option1" value="1">Register</option>
-                                            <option class="dropdown-item option1" value="0">Unregister</option>
+                                <div class="form-group">
+                                    <label>Register Status</label>
+                                    <select class="form-control" id="regstatus">
+                                        <option class="dropdown-item option1" value="5">Please Select</option>
+                                        <option class="dropdown-item option1" value="1">Register</option>
+                                        <option class="dropdown-item option1" value="0">Unregister</option>
 
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label for="exampleFormControlInput1" class="form-label">Rate</label>
-                                        <input type="text" id="rate" name="lease_rate" class="form-control" value="">
-                                        <input class="form-control" name="hid" id="hid" type="hidden" value="0">
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" name="submit" class="btn btn-primary" id="send_form">Add Rate</button>
-                                    </div>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="exampleFormControlInput1" class="form-label">Rate</label>
+                                    <input type="text" id="rate" name="lease_rate" class="form-control" value="">
+                                    <input class="form-control" name="hid" id="hid" type="hidden" value="0">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <button type="submit" name="submit" class="btn btn-primary" id="send_form">Add Rate</button>
+                                </div>
                             </fieldset>
                         </div>
             </form>
@@ -162,28 +163,107 @@
         $("#ajax_form").validate({
 
             rules: {
-                Lease_rate: {
+                type: {
                     required: true
-                }
+                },
+                brand_id: {
+                    required: true
+                },
+                model_id: {
+                    required: true
+                },
+                regstatus: {
+                    required: true
+                },
+                lease_rate: {
+                    required: true
+                },
             },
             messages: {
-                rate: {
-                    required: "Please provide a valid rate ",
-                }
 
+                type: {
+                    required: "Please provide a valid type name",
+                },
+                brand_id: {
+                    required: "Please provide a valid Brand Name ",
+                },
+                model_id: {
+                    required: "Please provide a valid Model Name ",
+                },
+                regstatus: {
+                    required: "Please provide a register status",
+                },
+                lease_rate: {
+                    required: "Please provide a lease rate",
+                },
             },
-            submitHandler: function(form) {
+                    submitHandler: function(form) {
+                        $.ajax({
+                            url: "<?php echo base_url('admin/Vehi_lease/create') ?>",
+                            type: "POST",
+                            data: $('#ajax_form').serialize(),
+                            dataType: "json",
+                            success: function(response) {
+                                if (response.success) {
+                                    $('#res_message').html(response.msg);
+                                    $('#res_message').show();
+                                    var forms = document.getElementsByClassName('needs-validation');
+                                    form.classList.remove('was-validated');
+                                } else {
+                                    $('#res_message').html(response.msg);
+                                    $('#res_message').show();
+                                }
+                            },
+                            error: function(response) {
+                                swal({
+                                    title: 'Oops! Your work not success!',
+                                    icon: 'error',
+                                    dangerMode: true,
+                                });
+                            }
+                        });
+                    }
+                });
+        }
+
+        function editrate(id) {
+            $.ajax({
+                url: "<?php echo base_url('admin/Vehi_lease/edit_lease') ?>",
+                type: "POST",
+                data: {
+                    id: id
+                },
+                dataType: "json",
+                success: function(response) {
+                    $("#hid").val(response.success[0]['id']);
+                    $("#lease_id").val(response.success[0]['id']);
+                    $("#lease_rate").val(response.success[0]['rate']);
+                    $("#send_form").html('Update lease');
+                },
+                error: function(response) {
+                    swal({
+                        title: 'Oops! Your work not success!',
+                        icon: 'error',
+                        dangerMode: true,
+                    });
+                }
+            });
+        }
+
+        function deleterate(id) {
+            if (confirm('Are you Sure ?')) {
                 $.ajax({
-                    url: "<?php echo base_url('admin/Vehi_lease/create') ?>",
+                    url: "<?php echo base_url('admin/Vehi_lease/delete_lease') ?>",
                     type: "POST",
-                    data: $('#ajax_form').serialize(),
+                    data: {
+                        id: id
+                    },
                     dataType: "json",
                     success: function(response) {
                         if (response.success) {
                             $('#res_message').html(response.msg);
                             $('#res_message').show();
-                            var forms = document.getElementsByClassName('needs-validation');
-                            form.classList.remove('was-validated');
+
                         } else {
                             $('#res_message').html(response.msg);
                             $('#res_message').show();
@@ -198,51 +278,18 @@
                     }
                 });
             }
-        });
-    }
+        }
 
-    function editrate(id) {
-        $.ajax({
-            url: "<?php echo base_url('admin/Vehi_lease/edit_lease') ?>",
-            type: "POST",
-            data: {
-                id: id
-            },
-            dataType: "json",
-            success: function(response) {
-                $("#hid").val(response.success[0]['id']);
-                $("#lease_id").val(response.success[0]['id']);
-                $("#lease_rate").val(response.success[0]['rate']);
-                $("#send_form").html('Update lease');
-            },
-            error: function(response) {
-                swal({
-                    title: 'Oops! Your work not success!',
-                    icon: 'error',
-                    dangerMode: true,
-                });
-            }
-        });
-    }
-
-    function deleterate(id) {
-        if (confirm('Are you Sure ?')) {
+        $("#type_id").change(function() {
             $.ajax({
-                url: "<?php echo base_url('admin/Vehi_lease/delete_lease') ?>",
+                url: "<?php echo base_url('admin/Vehi_lease/select_brand') ?>",
                 type: "POST",
                 data: {
-                    id: id
+                    id: $(this).val()
                 },
                 dataType: "json",
                 success: function(response) {
-                    if (response.success) {
-                        $('#res_message').html(response.msg);
-                        $('#res_message').show();
-
-                    } else {
-                        $('#res_message').html(response.msg);
-                        $('#res_message').show();
-                    }
+                    $("#brand_id").html(response.success);
                 },
                 error: function(response) {
                     swal({
@@ -252,47 +299,25 @@
                     });
                 }
             });
-        }
-    }
-
-    $("#type_id").change(function() {
-        $.ajax({
-            url: "<?php echo base_url('admin/Vehi_lease/select_brand') ?>",
-            type: "POST",
-            data: {
-                id: $(this).val()
-            },
-            dataType: "json",
-            success: function(response) {
-                $("#brand_id").html(response.success);
-            },
-            error: function(response) {
-                swal({
-                    title: 'Oops! Your work not success!',
-                    icon: 'error',
-                    dangerMode: true,
-                });
-            }
         });
-    });
-    $("#brand_id").change(function() {
-        $.ajax({
-            url: "<?php echo base_url('admin/Vehi_lease/select_model') ?>",
-            type: "POST",
-            data: {
-                id: $(this).val()
-            },
-            dataType: "json",
-            success: function(response) {
-                $("#model_id").html(response.success);
-            },
-            error: function(response) {
-                swal({
-                    title: 'Oops! Your work not success!',
-                    icon: 'error',
-                    dangerMode: true,
-                });
-            }
+        $("#brand_id").change(function() {
+            $.ajax({
+                url: "<?php echo base_url('admin/Vehi_lease/select_model') ?>",
+                type: "POST",
+                data: {
+                    id: $(this).val()
+                },
+                dataType: "json",
+                success: function(response) {
+                    $("#model_id").html(response.success);
+                },
+                error: function(response) {
+                    swal({
+                        title: 'Oops! Your work not success!',
+                        icon: 'error',
+                        dangerMode: true,
+                    });
+                }
+            });
         });
-    });
 </script>
